@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bluebell/controller"
 	"bluebell/dao/mysql"
 	"bluebell/dao/redis"
 	"bluebell/logger"
@@ -17,6 +18,7 @@ import (
 	"time"
 
 	"github.com/spf13/viper"
+
 	"go.uber.org/zap"
 )
 
@@ -27,7 +29,7 @@ func main() {
 		return
 	}
 	//2.初始化日志
-	if err := logger.Init(settings.Conf.LogConfig); err != nil {
+	if err := logger.Init(settings.Conf.LogConfig, settings.Conf.NameConfig.Mode); err != nil {
 		fmt.Printf("Init logger failed, err: %v\n", err)
 		return
 	}
@@ -48,13 +50,17 @@ func main() {
 	}
 	defer redis.Close()
 
-	if err := snowflake.Init(settings.Conf.StartTime, settings.Conf.MachineID); err != nil {
+	if err := snowflake.Init(settings.Conf.NameConfig); err != nil {
 		fmt.Printf("init sonwflake failed, err: %v\n", err)
 		return
 	}
+	//初始化gin框架内置的校验器使用的翻译器
+	if err := controller.InitTrans("zh"); err != nil {
+		fmt.Printf("init validator trans failed, err: %v\n", err)
+	}
 
 	//5.注册路由
-	r := routes.SetUp()
+	r := routes.SetUp(settings.Conf.Mode)
 	//6.启动服务（优雅关机）
 	srv := &http.Server{
 		Addr:    fmt.Sprintf(":%d", viper.GetInt("app.port")),

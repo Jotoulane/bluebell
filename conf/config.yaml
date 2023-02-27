@@ -1,13 +1,13 @@
-name: "bluebell"
-mode: "dev"
-port: 8081
-version: 0.0.0.0
-start_time: "2020-07-01"
-machine_id: 1
-
+app:
+  name: "bluebell"
+  mode: "dev"
+  port: 8081
+  version: v0.0.1
+  start_time: "2020-07-01"
+  machine_id: 1
 log:
   level: "debug"
-  filename: "bluebell"
+  filename: "bluebell.log"
   max_size: 200
   max_age: 30
   max_backups: 7
@@ -17,7 +17,7 @@ mysql:
   port: 3306
   username: "root"
   password: "lihuawei"
-  dbname: "haha"
+  dbname: "bluebell"
   max_open_conns: 20
   max_idle_conns: 10
 redis:
