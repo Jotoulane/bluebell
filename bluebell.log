@@ -7,3 +7,33 @@
 {"level":"INFO","time":"2023-02-27T20:50:01.304+0800","caller":"logger/logger.go:82","msg":"/signup","status":200,"method":"POST","path":"/signup","query":"","ip":"::1","user-agent":"PostmanRuntime/7.31.0","errors":"","cost":0}
 {"level":"INFO","time":"2023-02-27T20:50:04.988+0800","caller":"bluebell/main.go:85","msg":"Shutdown Server ..."}
 {"level":"INFO","time":"2023-02-27T20:50:04.988+0800","caller":"bluebell/main.go:94","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-02-27T21:50:55.916+0800","caller":"bluebell/main.go:37","msg":"logger init success..."}
+{"level":"ERROR","time":"2023-02-27T21:51:08.518+0800","caller":"controller/user.go:66","msg":"logic.Login failed","error":"密码错误"}
+{"level":"INFO","time":"2023-02-27T21:51:08.518+0800","caller":"logger/logger.go:82","msg":"/login","status":200,"method":"POST","path":"/login","query":"","ip":"::1","user-agent":"PostmanRuntime/7.31.0","errors":"","cost":0.0023132}
+{"level":"INFO","time":"2023-02-27T21:54:30.697+0800","caller":"bluebell/main.go:85","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-02-27T21:54:30.698+0800","caller":"bluebell/main.go:94","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-02-27T21:54:38.254+0800","caller":"bluebell/main.go:37","msg":"logger init success..."}
+{"level":"ERROR","time":"2023-02-27T21:54:48.924+0800","caller":"controller/user.go:67","msg":"logic.Login failed","error":"密码错误"}
+{"level":"INFO","time":"2023-02-27T21:54:48.924+0800","caller":"logger/logger.go:82","msg":"/login","status":200,"method":"POST","path":"/login","query":"","ip":"::1","user-agent":"PostmanRuntime/7.31.0","errors":"","cost":0.0016566}
+{"level":"INFO","time":"2023-02-27T21:56:40.402+0800","caller":"bluebell/main.go:85","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-02-27T21:56:40.403+0800","caller":"bluebell/main.go:94","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-02-27T21:56:48.818+0800","caller":"bluebell/main.go:37","msg":"logger init success..."}
+{"level":"ERROR","time":"2023-02-27T21:56:52.669+0800","caller":"controller/user.go:68","msg":"logic.Login failed","error":"密码错误"}
+{"level":"INFO","time":"2023-02-27T21:56:52.670+0800","caller":"logger/logger.go:82","msg":"/login","status":200,"method":"POST","path":"/login","query":"","ip":"::1","user-agent":"PostmanRuntime/7.31.0","errors":"","cost":0.0019601}
+{"level":"INFO","time":"2023-02-27T21:59:19.204+0800","caller":"bluebell/main.go:85","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-02-27T21:59:19.204+0800","caller":"bluebell/main.go:94","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-02-27T21:59:39.333+0800","caller":"bluebell/main.go:37","msg":"logger init success..."}
+{"level":"ERROR","time":"2023-02-27T22:01:33.770+0800","caller":"controller/user.go:67","msg":"logic.Login failed","error":"密码错误"}
+{"level":"INFO","time":"2023-02-27T22:01:33.770+0800","caller":"logger/logger.go:82","msg":"/login","status":200,"method":"POST","path":"/login","query":"","ip":"::1","user-agent":"PostmanRuntime/7.31.0","errors":"","cost":100.9135148}
+{"level":"INFO","time":"2023-02-27T22:01:33.887+0800","caller":"bluebell/main.go:85","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-02-27T22:01:33.888+0800","caller":"bluebell/main.go:94","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-02-27T22:01:37.714+0800","caller":"bluebell/main.go:37","msg":"logger init success..."}
+{"level":"INFO","time":"2023-02-27T22:01:41.852+0800","caller":"bluebell/main.go:85","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-02-27T22:01:41.852+0800","caller":"bluebell/main.go:94","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-02-27T22:01:45.573+0800","caller":"bluebell/main.go:37","msg":"logger init success..."}
+{"level":"ERROR","time":"2023-02-27T22:05:23.310+0800","caller":"controller/user.go:67","msg":"logic.Login failed","error":"密码错误"}
+{"level":"INFO","time":"2023-02-27T22:05:23.311+0800","caller":"logger/logger.go:82","msg":"/login","status":200,"method":"POST","path":"/login","query":"","ip":"::1","user-agent":"PostmanRuntime/7.31.0","errors":"","cost":214.2852322}
+{"level":"INFO","time":"2023-02-27T22:05:23.352+0800","caller":"bluebell/main.go:85","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-02-27T22:05:23.352+0800","caller":"bluebell/main.go:94","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-02-27T22:05:29.555+0800","caller":"bluebell/main.go:37","msg":"logger init success..."}
+{"level":"INFO","time":"2023-02-27T22:05:52.921+0800","caller":"logger/logger.go:82","msg":"/login","status":200,"method":"POST","path":"/login","query":"","ip":"::1","user-agent":"PostmanRuntime/7.31.0","errors":"","cost":5.9433621}

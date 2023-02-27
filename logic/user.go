@@ -15,9 +15,17 @@ func SignUp(p *models.ParamSignUp) (err error) {
 	uerId := snowflake.GenID()
 	user := models.User{
 		UserId:   uerId,
-		UserName: p.Username,
+		Username: p.Username,
 		Password: p.Password,
 	}
 	//保存进数据库
 	return mysql.InsertUser(user)
+}
+
+func Login(p *models.ParamLogin) (err error) {
+	user := &models.User{
+		Username: p.Username,
+		Password: p.Password,
+	}
+	return mysql.Login(user)
 }
