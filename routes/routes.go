@@ -31,6 +31,5 @@ func SetUp(mode string) *gin.Engine {
 			"msg": "404",
 		})
 	})
-
 	return r
 }
