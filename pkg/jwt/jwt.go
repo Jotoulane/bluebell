@@ -1,6 +1,7 @@
 package jwt
 
 import (
+	"bluebell/settings"
 	"errors"
 	"time"
 
@@ -30,7 +31,7 @@ func GenToken(userId int64, username string) (string, error) {
 		userId,
 		username, // 自定义字段
 		jwt.RegisteredClaims{
-			ExpiresAt: jwt.NewNumericDate(time.Now().Add(TokenExpireDuration)),
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Duration(settings.Conf.JwtExpire) * time.Hour)),
 			Issuer:    "bluebell", // 签发人
 		},
 	}

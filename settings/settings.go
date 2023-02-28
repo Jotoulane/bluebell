@@ -23,6 +23,7 @@ type NameConfig struct {
 	StartTime string `mapstructure:"start_time"`
 	MachineID int64  `mapstructure:"machine_id"`
 	Port      string `mapstructure:"port"`
+	JwtExpire int64  `mapstructure:"jwt_expire"`
 }
 
 type LogConfig struct {

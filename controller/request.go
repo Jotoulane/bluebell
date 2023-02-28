@@ -1,17 +1,18 @@
 package controller
 
 import (
-	"bluebell/middleware"
 	"errors"
 
 	"github.com/gin-gonic/gin"
 )
 
+const ContextUserIDKey = "userID"
+
 var ErrorUserNotLogin = errors.New("用户未登录")
 
 // 获取当前用户登录用户id
-func getCurrentUser(c *gin.Context) (userID int64, err error) {
-	uid, ok := c.Get(middleware.ContextUserIDKey)
+func getCurrentUserID(c *gin.Context) (userID int64, err error) {
+	uid, ok := c.Get(ContextUserIDKey)
 	if !ok {
 		err = ErrorUserNotLogin
 		return

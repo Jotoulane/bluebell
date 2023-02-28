@@ -5,7 +5,6 @@ import (
 	"bluebell/logic"
 	"bluebell/models"
 	"errors"
-	"fmt"
 
 	"github.com/go-playground/validator/v10"
 
@@ -28,7 +27,7 @@ func SignUpHandler(c *gin.Context) {
 		ResponseErrorWithMsg(c, CodeInvalidParam, removeTopStruct(errors.Translate(trans)))
 		return
 	}
-	fmt.Printf("p%v\n", p)
+	//fmt.Printf("p%v\n", p)
 	// 2.业务处理
 	if err := logic.SignUp(p); err != nil {
 		zap.L().Error("logic.SignUp failed", zap.Error(err))

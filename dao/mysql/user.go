@@ -5,16 +5,9 @@ import (
 	"crypto/md5"
 	"database/sql"
 	"encoding/hex"
-	"errors"
 )
 
 const secret = "bilibili.com"
-
-var (
-	ErrorUserExist       = errors.New("用户已存在")
-	ErrorUserNotExist    = errors.New("用户不存在")
-	ErrorInvalidPassword = errors.New("用户密码错误")
-)
 
 // CheckUserExist 根据username判断用户是否存在
 func CheckUserExist(username string) (err error) {
@@ -62,5 +55,13 @@ func Login(user *models.User) (err error) {
 	if password != user.Password {
 		return ErrorInvalidPassword
 	}
+	return
+}
+
+// GetUserById 根据id获取用户id
+func GetUserById(uid int64) (user *models.User, err error) {
+	user = new(models.User)
+	sqlStr := "select user_id,username from user where user_id = ?"
+	err = db.Get(user, sqlStr, uid)
 	return
 }
