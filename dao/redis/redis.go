@@ -7,10 +7,10 @@ import (
 	"github.com/spf13/viper"
 )
 
-var rdb *redis.Client
+var client *redis.Client
 
 func Init() (err error) {
-	rdb = redis.NewClient(&redis.Options{
+	client = redis.NewClient(&redis.Options{
 		Addr: fmt.Sprintf(
 			"%s:%d",
 			viper.GetString("redis.host"),
@@ -20,10 +20,10 @@ func Init() (err error) {
 		DB:       viper.GetInt("redis.db"),          // 数据库
 		PoolSize: viper.GetInt("redis.pool_size"),   // 连接池大小
 	})
-	_, err = rdb.Ping().Result()
+	_, err = client.Ping().Result()
 	return
 }
 
 func Close() {
-	rdb.Close()
+	client.Close()
 }

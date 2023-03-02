@@ -32,7 +32,7 @@ func CreatePostHandler(c *gin.Context) {
 	}
 	p.AuthorID = userID
 	//创建帖子
-	if err := logic.CreatePost(p); err != nil {
+	if err = logic.CreatePost(p); err != nil {
 		zap.L().Error("logic.CreatePost(p) failed", zap.Error(err))
 		ResponseError(c, CodeServerBusy)
 		return
@@ -60,4 +60,45 @@ func GetPostDetailHandler(c *gin.Context) {
 	}
 	//返回相应
 	ResponseSuccess(c, data)
+}
+
+// GetPostListHandler 帖子列表的处理函数
+func GetPostListHandler(c *gin.Context) {
+	pageNum, pageSize := getPostList(c)
+	data, err := logic.GetPostList(pageNum, pageSize)
+	if err != nil {
+		zap.L().Error("logic.GetPostList() failed", zap.Error(err))
+		ResponseError(c, CodeServerBusy)
+		return
+	}
+	ResponseSuccess(c, data)
+}
+
+// PostVoteController 为帖子投票
+func PostVoteController(c *gin.Context) {
+	//参数校验
+	vote := new(models.ParamVoteData)
+	if err := c.ShouldBindJSON(vote); err != nil {
+		//请求参数有问题
+		errs, ok := err.(validator.ValidationErrors)
+		if !ok {
+			ResponseError(c, CodeInvalidParam)
+			return
+		}
+		errData := removeTopStruct(errs.Translate(trans))
+		ResponseErrorWithMsg(c, CodeInvalidParam, errData)
+		return
+	}
+	userId, err := getCurrentUserID(c)
+	if err != nil {
+		ResponseError(c, CodeNeedLogin)
+		return
+	}
+	//投票业务逻辑
+	if err = logic.VoteForPost(userId, vote); err != nil {
+		zap.L().Error("logic.VoteForPost")
+		ResponseError(c, CodeServerBusy)
+		return
+	}
+	ResponseSuccess(c, nil)
 }
