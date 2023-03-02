@@ -31,7 +31,7 @@ func SetUp(mode string) *gin.Engine {
 		v1.POST("/post", controller.CreatePostHandler)              //创建帖子
 		v1.GET("/post/:id", controller.GetPostDetailHandler)        //帖子详情
 		v1.GET("/posts/", controller.GetPostListHandler)            //帖子列表
-		v1.POST("/vote", controller.PostVoteController)
+		v1.POST("/vote", controller.PostVoteController)             //帖子投票
 	}
 
 	//v1.GET("/ping", middleware.JWTAuthMiddleware(), func(context *gin.Context) {
