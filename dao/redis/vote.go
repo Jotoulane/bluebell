@@ -3,6 +3,7 @@ package redis
 import (
 	"errors"
 	"math"
+	"strconv"
 	time "time"
 
 	"github.com/go-redis/redis"
@@ -13,9 +14,12 @@ const (
 	scorePerVote     float64 = 432
 )
 
-var ErrVoteTimeExpire = errors.New("投票时间已过")
+var (
+	ErrVoteTimeExpire = errors.New("投票时间已过")
+	ErrVoteRepeated   = errors.New("不允许重复投票")
+)
 
-func CreatePost(postID int64) error {
+func CreatePost(postID int64, communityID int64) error {
 	pipeline := client.TxPipeline()
 	//帖子时间
 	pipeline.ZAdd(getRedisKey(KeyPostScoreZSet), redis.Z{
@@ -27,6 +31,9 @@ func CreatePost(postID int64) error {
 		Score:  float64(time.Now().Unix()),
 		Member: postID,
 	})
+	//把帖子id加到社区的set
+	cKey := getRedisKey(KeyCommunitySetPrefix + strconv.Itoa(int(communityID)))
+	pipeline.SAdd(cKey, postID)
 	_, err := pipeline.Exec()
 	return err
 }
@@ -42,6 +49,11 @@ func VoteForPost(userID, postID string, value float64) error {
 
 	//查询当前用户给当前帖子的 投票记录
 	ov := client.ZScore(getRedisKey(KeyPostVotedZSetPrefix+postID), userID).Val()
+	//
+	if value == ov {
+		return ErrVoteRepeated
+	}
+
 	var op float64
 	if value > ov {
 		op = 1

@@ -2,7 +2,7 @@ package controller
 
 import (
 	"bluebell/logic"
-	"bluebell/models"
+	models "bluebell/models"
 	"strconv"
 
 	"github.com/go-playground/validator/v10"
@@ -102,3 +102,49 @@ func PostVoteController(c *gin.Context) {
 	}
 	ResponseSuccess(c, nil)
 }
+
+// GetPostListHandler2 接口帖子列表升级版
+// 根据前端的数据按照时间或者分数排序
+func GetPostListHandler2(c *gin.Context) {
+	//获取请求参数
+	p := models.ParamPostList{
+		Page:  1,
+		Size:  10,
+		Order: models.OrderTime,
+	}
+	if err := c.ShouldBindQuery(&p); err != nil {
+		zap.L().Error("GetPostListHandler2 with invalid params", zap.Error(err))
+		ResponseError(c, CodeInvalidParam)
+		return
+	}
+	//去redis查询id列表
+	data, err := logic.GetPostListNew(&p)
+	if err != nil {
+		zap.L().Error("logic.GetPostList() failed", zap.Error(err))
+		ResponseError(c, CodeServerBusy)
+		return
+	}
+	ResponseSuccess(c, data)
+}
+
+//// GetCommunityPostListHandler 根据社区查询帖子列表
+//func GetCommunityPostListHandler(c *gin.Context) {
+//	//获取请求参数
+//	p := &models.ParamCommunityPostList{
+//		ParamPostList: &models.ParamPostList{Size: 10, Order: models.OrderTime},
+//	}
+//	if err := c.ShouldBindQuery(p); err != nil {
+//		zap.L().Error("GetCommunityPostListHandler with invalid params", zap.Error(err))
+//		ResponseError(c, CodeInvalidParam)
+//		return
+//	}
+//	//去redis查询id列表
+//
+//	data, err := logic.GetCommunityPostList(p)
+//	if err != nil {
+//		zap.L().Error("logic.GetCommunityPostList() failed", zap.Error(err))
+//		ResponseError(c, CodeServerBusy)
+//		return
+//	}
+//	ResponseSuccess(c, data)
+//}
